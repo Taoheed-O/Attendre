@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -832,7 +832,7 @@ background-color: rgba(255, 255, 255, 0);</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QDateEdit" name="DATE">
+     <widget class="QDateEdit" name="dateEdit">
       <property name="geometry">
        <rect>
         <x>460</x>

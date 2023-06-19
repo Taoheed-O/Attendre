@@ -19,14 +19,14 @@ class MainApp(QMainWindow, ui):
         self.CLOSE.clicked.connect(self.close_window)
         self.TRAINLINK1.clicked.connect(self.show_training_form)
         self.ATTLINK1.clicked.connect(self.show_attendance_entry_form)
-    #     self.REPORTSLINK1.clicked.connect(self.show_reports_form)
-    #     self.PREVIOUSRECO.clicked.connect(self.show_mainform)
-    #     self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
-    #     self.PREVIOUSREPORT.clicked.connect(self.show_mainform)
-    #     self.TRAININGBUTTON.clicked.connect(self.start_training)
+        self.REPORTSLINK1.clicked.connect(self.show_report_form)
+        self.PREVIOUSRECO.clicked.connect(self.show_mainform)
+        self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
+        self.PREVIOUSREPORT.clicked.connect(self.show_mainform)
+    #     self.TRAINBUTTON.clicked.connect(self.start_training)
     #     self.RECORD.clicked.connect(self.record_attendance)
     #     self.dateEdit.setDate(date.today())
-    #     self.dateEdit.dateChanged.connect(self.show_selected_date_reports)
+    #     self.dateEdit.dateChanged.connect(self.show_selected_date_report)
     #     self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
     #     try:
     #         con = sqlite3.connect("face-reco.db")
@@ -67,39 +67,39 @@ class MainApp(QMainWindow, ui):
     def show_attendance_entry_form(self):
         self.tabWidget.setCurrentIndex(3)
 
-    # ### SHOW REPORTS FORM ###
-    # def show_reports_form(self):
-    #     self.tabWidget.setCurrentIndex(4)
-    #     self.REPORTS.setRowCount(0)
-    #     self.REPORTS.clear()
-    #     con = sqlite3.connect("face-reco.db")
-    #     cursor = con.execute("SELECT * FROM attendance")
-    #     result = cursor.fetchall()
-    #     r=0
-    #     c=0
-    #     for row_number,row_data in enumerate(result):
-    #         r+=1
-    #         c=0
-    #         for column_number,data in enumerate(row_data):
-    #             c+=1
-    #     self.REPORTS.setColumnCount(c)
+    ### SHOW REPORT FORM ###
+    def show_report_form(self):
+        self.tabWidget.setCurrentIndex(4)
+        self.REPORTTABLE.setRowCount(0)
+        self.REPORTTABLE.clear()
+        # con = sqlite3.connect("face-reco.db")
+        # cursor = con.execute("SELECT * FROM attendance")
+        # result = cursor.fetchall()
+        # r=0
+        # c=0
+        # for row_number,row_data in enumerate(result):
+        #     r+=1
+        #     c=0
+        #     for column_number,data in enumerate(row_data):
+        #         c+=1
+        # self.REPORTTABLE.setColumnCount(c)
 
-    #     for row_number,row_data in enumerate(result):
-    #         self.REPORTS.insertRow(row_number)
-    #         for column_number, data in enumerate(row_data):
-    #             self.REPORTS.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+        # for row_number,row_data in enumerate(result):
+        #     self.REPORTTABLE.insertRow(row_number)
+        #     for column_number, data in enumerate(row_data):
+        #         self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-    #     self.REPORTS.setHorizontalHeaderLabels(['Id','Name','Date'])        
-    #     self.REPORTS.setColumnWidth(0,10)
-    #     self.REPORTS.setColumnWidth(1,60)
-    #     self.REPORTS.setColumnWidth(2,70)
-    #     self.REPORTS.verticalHeader().setVisible(False)
+        # self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        # self.REPORTTABLE.setColumnWidth(0,10)
+        # self.REPORTTABLE.setColumnWidth(1,60)
+        # self.REPORTTABLE.setColumnWidth(2,70)
+        # self.REPORTTABLE.verticalHeader().setVisible(False)
         
 
     # ### SHOW SELECTED DATE REPORTS ###
-    # def show_selected_date_reports(self):
-    #     self.REPORTS.setRowCount(0)
-    #     self.REPORTS.clear()
+    # def show_selected_date_report(self):
+    #     self.REPORTTABLE.setRowCount(0)
+    #     self.REPORTTABLE.clear()
     #     con = sqlite3.connect("face-reco.db")
     #     cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
     #     result = cursor.fetchall()
@@ -110,18 +110,18 @@ class MainApp(QMainWindow, ui):
     #         c=0
     #         for column_number,data in enumerate(row_data):
     #             c+=1
-    #     self.REPORTS.setColumnCount(c)
+    #     self.REPORTTABLE.setColumnCount(c)
 
     #     for row_number,row_data in enumerate(result):
-    #         self.REPORTS.insertRow(row_number)
+    #         self.REPORTTABLE.insertRow(row_number)
     #         for column_number, data in enumerate(row_data):
-    #             self.REPORTS.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+    #             self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-    #     self.REPORTS.setHorizontalHeaderLabels(['Id','Name','Date'])        
-    #     self.REPORTS.setColumnWidth(0,10)
-    #     self.REPORTS.setColumnWidth(1,60)
-    #     self.REPORTS.setColumnWidth(2,70)
-    #     self.REPORTS.verticalHeader().setVisible(False)
+    #     self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+    #     self.REPORTTABLE.setColumnWidth(0,10)
+    #     self.REPORTTABLE.setColumnWidth(1,60)
+    #     self.REPORTTABLE.setColumnWidth(2,70)
+    #     self.REPORTTABLE.verticalHeader().setVisible(False)
 
 
     # ### TRAINING PROCESS ###

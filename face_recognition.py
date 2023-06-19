@@ -15,10 +15,10 @@ class MainApp(QMainWindow, ui):
         self.setupUi(self)
         self.tabWidget.setCurrentIndex(0)
         self.LOGIN.clicked.connect(self.login)
-    #     self.LOGOUT.clicked.connect(self.logout)
-    #     self.CLOSE.clicked.connect(self.close_window)
-    #     self.TRAINLINK1.clicked.connect(self.show_training_form)
-    #     self.ATTLINK1.clicked.connect(self.show_attendance_entry_form)
+        self.LOGOUT.clicked.connect(self.logout)
+        self.CLOSE.clicked.connect(self.close_window)
+        self.TRAINLINK1.clicked.connect(self.show_training_form)
+        self.ATTLINK1.clicked.connect(self.show_attendance_entry_form)
     #     self.REPORTSLINK1.clicked.connect(self.show_reports_form)
     #     self.PREVIOUSRECO.clicked.connect(self.show_mainform)
     #     self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
@@ -47,25 +47,25 @@ class MainApp(QMainWindow, ui):
             self.invalidmessage.setText("Invalid Password...")
             self.PASSWORD.setText("")
 
-    # ### LOG OUT PROCESS ###
-    # def logout(self):
-    #     self.tabWidget.setCurrentIndex(0)
+    ### LOG OUT PROCESS ###
+    def logout(self):
+        self.tabWidget.setCurrentIndex(0)
 
-    # ### CLOSE WINDOW PROCESS ###
-    # def close_window(self):
-    #     self.close()
+    ### CLOSE WINDOW PROCESS ###
+    def close_window(self):
+        self.close()
 
-    # ### SHOW MAIN FORM ###
-    # def show_mainform(self):
-    #     self.tabWidget.setCurrentIndex(1)        
+    ### SHOW MAIN FORM ###
+    def show_mainform(self):
+        self.tabWidget.setCurrentIndex(1)        
 
-    # ### SHOW TRAINING FORM ###
-    # def show_training_form(self):
-    #     self.tabWidget.setCurrentIndex(2)
+    ### SHOW TRAINING FORM ###
+    def show_training_form(self):
+        self.tabWidget.setCurrentIndex(2)
 
-    # ### SHOW ATTENDANCE ENTRY FORM ###
-    # def show_attendance_entry_form(self):
-    #     self.tabWidget.setCurrentIndex(3)
+    ### SHOW ATTENDANCE ENTRY FORM ###
+    def show_attendance_entry_form(self):
+        self.tabWidget.setCurrentIndex(3)
 
     # ### SHOW REPORTS FORM ###
     # def show_reports_form(self):
@@ -261,4 +261,3 @@ def main():
 
 if __name__ == '__main__':
     main()    
-    

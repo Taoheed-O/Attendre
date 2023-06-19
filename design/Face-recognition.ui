@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -50,7 +50,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>login.png</pixmap>
+       <pixmap>../../Face-Recognition/design/login.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -215,6 +215,27 @@ QPushButton#CLOSE:hover{
        <string>Close</string>
       </property>
      </widget>
+     <widget class="QLabel" name="invalidmessage">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(2, 255, 200);
+font: 75 10pt &quot;Terminal&quot;;
+background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Tab2">
      <attribute name="title">
@@ -237,7 +258,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>mainform.png</pixmap>
+       <pixmap>../../Face-Recognition/design/mainform.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -389,7 +410,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>training.png</pixmap>
+       <pixmap>../../Face-Recognition/design/training.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -610,7 +631,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>facereco.png</pixmap>
+       <pixmap>../../Face-Recognition/design/facereco.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -784,7 +805,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>reports.png</pixmap>
+       <pixmap>../../Face-Recognition/design/reports.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>

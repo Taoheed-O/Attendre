@@ -14,7 +14,7 @@ class MainApp(QMainWindow, ui):
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.tabWidget.setCurrentIndex(0)
-    #     self.LOGIN.clicked.connect(self.login)
+        self.LOGIN.clicked.connect(self.login)
     #     self.LOGOUT.clicked.connect(self.logout)
     #     self.CLOSE.clicked.connect(self.close_window)
     #     self.TRAINLINK1.clicked.connect(self.show_training_form)
@@ -36,16 +36,16 @@ class MainApp(QMainWindow, ui):
     #     except:
     #         print("Error in database")
 
-    # ### LOGIN PROCESS ###
-    # def login(self):
-    #     pw = self.PASSWORD.text()
-    #     if(pw=="123"):
-    #         self.PASSWORD.setText("")
-    #         self.LOGIN.setText("")
-    #         self.tabWidget.setCurrentIndex(1)
-    #     else:
-    #         self.LOGIN.setText("Invalid Password..")
-    #         self.PASSWORD.setText("")
+    ### LOGIN PROCESS ###
+    def login(self):
+        pw = self.PASSWORD.text()
+        if(pw=="UiDept123#"):
+            self.PASSWORD.setText("")
+            self.LOGIN.setText("")
+            self.tabWidget.setCurrentIndex(1)
+        else:
+            self.invalidmessage.setText("Invalid Password...")
+            self.PASSWORD.setText("")
 
     # ### LOG OUT PROCESS ###
     # def logout(self):

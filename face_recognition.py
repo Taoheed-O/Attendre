@@ -24,17 +24,17 @@ class MainApp(QMainWindow, ui):
         self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
         self.PREVIOUSREPORT.clicked.connect(self.show_mainform)
         self.TRAINBUTTON.clicked.connect(self.start_training)
-    #     self.RECORD.clicked.connect(self.record_attendance)
-    #     self.dateEdit.setDate(date.today())
-    #     self.dateEdit.dateChanged.connect(self.show_selected_date_report)
-    #     self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
-    #     try:
-    #         con = sqlite3.connect("face-reco.db")
-    #         con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, attendancedate TEXT)")
-    #         con.commit()
-    #         print("Table created successfully")
-    #     except:
-    #         print("Error in database")
+        self.RECORD.clicked.connect(self.record_attendance)
+        self.dateEdit.setDate(date.today())
+        self.dateEdit.dateChanged.connect(self.show_selected_date_report)
+        self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
+        try:
+            con = sqlite3.connect("face-reco.db")
+            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, attendancedate TEXT)")
+            con.commit()
+            print("Table created successfully")
+        except:
+            print("Error in database")
 
     ### LOGIN PROCESS ###
     def login(self):
@@ -72,56 +72,56 @@ class MainApp(QMainWindow, ui):
         self.tabWidget.setCurrentIndex(4)
         self.REPORTTABLE.setRowCount(0)
         self.REPORTTABLE.clear()
-        # con = sqlite3.connect("face-reco.db")
-        # cursor = con.execute("SELECT * FROM attendance")
-        # result = cursor.fetchall()
-        # r=0
-        # c=0
-        # for row_number,row_data in enumerate(result):
-        #     r+=1
-        #     c=0
-        #     for column_number,data in enumerate(row_data):
-        #         c+=1
-        # self.REPORTTABLE.setColumnCount(c)
+        con = sqlite3.connect("face-reco.db")
+        cursor = con.execute("SELECT * FROM attendance")
+        result = cursor.fetchall()
+        r=0
+        c=0
+        for row_number,row_data in enumerate(result):
+            r+=1
+            c=0
+            for column_number,data in enumerate(row_data):
+                c+=1
+        self.REPORTTABLE.setColumnCount(c)
 
-        # for row_number,row_data in enumerate(result):
-        #     self.REPORTTABLE.insertRow(row_number)
-        #     for column_number, data in enumerate(row_data):
-        #         self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+        for row_number,row_data in enumerate(result):
+            self.REPORTTABLE.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        # self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
-        # self.REPORTTABLE.setColumnWidth(0,10)
-        # self.REPORTTABLE.setColumnWidth(1,60)
-        # self.REPORTTABLE.setColumnWidth(2,70)
-        # self.REPORTTABLE.verticalHeader().setVisible(False)
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(1,60)
+        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.verticalHeader().setVisible(False)
         
 
-    # ### SHOW SELECTED DATE REPORTS ###
-    # def show_selected_date_report(self):
-    #     self.REPORTTABLE.setRowCount(0)
-    #     self.REPORTTABLE.clear()
-    #     con = sqlite3.connect("face-reco.db")
-    #     cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
-    #     result = cursor.fetchall()
-    #     r=0
-    #     c=0
-    #     for row_number,row_data in enumerate(result):
-    #         r+=1
-    #         c=0
-    #         for column_number,data in enumerate(row_data):
-    #             c+=1
-    #     self.REPORTTABLE.setColumnCount(c)
+    ### SHOW SELECTED DATE REPORTS ###
+    def show_selected_date_report(self):
+        self.REPORTTABLE.setRowCount(0)
+        self.REPORTTABLE.clear()
+        con = sqlite3.connect("face-reco.db")
+        cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
+        result = cursor.fetchall()
+        r=0
+        c=0
+        for row_number,row_data in enumerate(result):
+            r+=1
+            c=0
+            for column_number,data in enumerate(row_data):
+                c+=1
+        self.REPORTTABLE.setColumnCount(c)
 
-    #     for row_number,row_data in enumerate(result):
-    #         self.REPORTTABLE.insertRow(row_number)
-    #         for column_number, data in enumerate(row_data):
-    #             self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+        for row_number,row_data in enumerate(result):
+            self.REPORTTABLE.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-    #     self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
-    #     self.REPORTTABLE.setColumnWidth(0,10)
-    #     self.REPORTTABLE.setColumnWidth(1,60)
-    #     self.REPORTTABLE.setColumnWidth(2,70)
-    #     self.REPORTTABLE.verticalHeader().setVisible(False)
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(1,60)
+        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.verticalHeader().setVisible(False)
 
 
     ### TRAINING PROCESS ###
@@ -163,8 +163,8 @@ class MainApp(QMainWindow, ui):
     def record_attendance(self):
         self.currentstatus.setText("Process started.. Waiting..")        
         haar_file = 'haarcascade_frontalface_default.xml'
-        face_cascade = cv2.CascadeClassifier(haar_file)
-        datasets = 'datasets'
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + haar_file)
+        datasets = 'students'
         (images,labels,names,id) =([],[],{},0)
         for(subdirs,dirs,files) in os.walk(datasets):
             for subdir in dirs:
@@ -225,7 +225,7 @@ class MainApp(QMainWindow, ui):
                     except:
                         print("Error in database insert")
                     print("Attendance Registered successfully")
-                    self.currentstatus.setText("Attence entered for " + names[prediction[0]])            
+                    self.currentstatus.setText("Attendance registered for " + names[prediction[0]])            
                     cnt=0
 
                 else:

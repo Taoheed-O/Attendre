@@ -196,7 +196,7 @@ class MainApp(QMainWindow, ui):
                 if(prediction[1]<800):
                     cv2.putText(im,'%s-%.0f'%(names[prediction[0]],prediction[1]),(x-10,y-10),cv2.FONT_HERSHEY_PLAIN,2,(0,0,255))
                     print(names[prediction[0]])
-                    self.currentstatus.setText("Detected face " + names[prediction[0]])        
+                    self.currentstatus.setText("Detected face - " + names[prediction[0]])        
 
 
 

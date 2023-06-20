@@ -127,7 +127,7 @@ class MainApp(QMainWindow, ui):
     ### TRAINING PROCESS ###
     def start_training(self):
         haar_file = 'haarcascade_files/haarcascade_frontalface_default.xml'
-        datasets = 'datasets'
+        datasets = 'students'
         sub_data = self.traineeName.text()
         path = os.path.join(datasets,sub_data)
         if not os.path.isdir(path):

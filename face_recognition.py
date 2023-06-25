@@ -199,7 +199,6 @@ class MainApp(QMainWindow, ui):
                     self.currentstatus.setText("Detected face - " + names[prediction[0]])        
 
 
-
                     attendanceid =0
                     available = False
                     try:

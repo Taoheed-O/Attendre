@@ -30,7 +30,7 @@ class MainApp(QMainWindow, ui):
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
-            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, attendancedate TEXT)")
+            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, matric number INTEGER, attendancedate TEXT)")
             con.commit()
             print("Table created successfully")
         except:
@@ -89,7 +89,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)
@@ -117,7 +117,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)

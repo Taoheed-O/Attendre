@@ -465,7 +465,7 @@ font: 75 10pt &quot;Terminal&quot;;
 background-color: rgba(255, 255, 255, 0);</string>
       </property>
       <property name="text">
-       <string>Enter student Name</string>
+       <string>Enter your matric</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>

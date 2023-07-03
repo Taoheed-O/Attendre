@@ -23,9 +23,12 @@ class MainApp(QMainWindow, ui):
         self.PREVIOUSRECO.clicked.connect(self.show_mainform)
         self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
         self.PREVIOUSREPORT.clicked.connect(self.show_mainform)
+        self.PREVIOUSREPORT_2.clicked.connect(self.show_mainform)
         self.TRAINBUTTON.clicked.connect(self.start_training)
         self.RECORD.clicked.connect(self.record_attendance)
         self.dateEdit.setDate(date.today())
+        self.dateEdit_2.setDate(date.today())
+        self.dateEdit_3.setDate(date.today())
         self.dateEdit.dateChanged.connect(self.show_selected_date_report)
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
@@ -94,7 +97,7 @@ class MainApp(QMainWindow, ui):
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)
         self.REPORTTABLE.verticalHeader().setVisible(False)
-        
+
 
     ### SHOW SELECTED DATE REPORTS ###
     def show_selected_date_report(self):
@@ -123,6 +126,33 @@ class MainApp(QMainWindow, ui):
         self.REPORTTABLE.setColumnWidth(2,70)
         self.REPORTTABLE.verticalHeader().setVisible(False)
 
+
+
+    def show_eligibility_form(self):
+        self.REPORTTABLE.setRowCount(0)
+        self.REPORTTABLE.clear()
+        con = sqlite3.connect("face-reco.db")
+        cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
+        result = cursor.fetchall()
+        r=0
+        c=0
+        for row_number,row_data in enumerate(result):
+            r+=1
+            c=0
+            for column_number,data in enumerate(row_data):
+                c+=1
+        self.REPORTTABLE.setColumnCount(c)
+
+        for row_number,row_data in enumerate(result):
+            self.REPORTTABLE.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(1,60)
+        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.verticalHeader().setVisible(False)
 
     ### TRAINING PROCESS ###
     def start_training(self):

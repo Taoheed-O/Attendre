@@ -20,6 +20,7 @@ class MainApp(QMainWindow, ui):
         self.TRAINLINK1.clicked.connect(self.show_training_form)
         self.ATTLINK1.clicked.connect(self.show_attendance_entry_form)
         self.REPORTSLINK1.clicked.connect(self.show_report_form)
+        self.ELIGIBILITYLINK1.clicked.connect(self.show_status_form)
         self.PREVIOUSRECO.clicked.connect(self.show_mainform)
         self.PREVIOUSPAGE.clicked.connect(self.show_mainform)
         self.PREVIOUSREPORT.clicked.connect(self.show_mainform)
@@ -30,6 +31,7 @@ class MainApp(QMainWindow, ui):
         self.dateEdit_2.setDate(date.today())
         self.dateEdit_3.setDate(date.today())
         self.dateEdit.dateChanged.connect(self.show_selected_date_report)
+        self.dateEdit_2.dateChanged.connect(self.show_eligibility_report)
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
@@ -128,11 +130,12 @@ class MainApp(QMainWindow, ui):
 
 
 
-    def show_eligibility_form(self):
+    def show_status_form(self):
+        self.tabWidget.setCurrentIndex(5)
         self.REPORTTABLE.setRowCount(0)
         self.REPORTTABLE.clear()
         con = sqlite3.connect("face-reco.db")
-        cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
+        cursor = con.execute("SELECT * FROM attendance")
         result = cursor.fetchall()
         r=0
         c=0
@@ -153,6 +156,33 @@ class MainApp(QMainWindow, ui):
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)
         self.REPORTTABLE.verticalHeader().setVisible(False)
+
+
+    def show_eligibility_report(self):
+        self.STATUSTABLE.setRowCount(0)
+        self.STATUSTABLE.clear()
+        con = sqlite3.connect("face-reco.db")
+        cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
+        result = cursor.fetchall()
+        r=0
+        c=0
+        for row_number,row_data in enumerate(result):
+            r+=1
+            c=0
+            for column_number,data in enumerate(row_data):
+                c+=1
+        self.STATUSTABLE.setColumnCount(c)
+
+        for row_number,row_data in enumerate(result):
+            self.REPORTTABLE.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
+        self.STATUSTABLE.setColumnWidth(0,10)
+        self.STATUSTABLE.setColumnWidth(1,60)
+        self.STATUSTABLE.setColumnWidth(2,70)
+        self.STATUSTABLE.verticalHeader().setVisible(False)
 
     ### TRAINING PROCESS ###
     def start_training(self):

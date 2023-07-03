@@ -132,37 +132,10 @@ class MainApp(QMainWindow, ui):
 
     def show_status_form(self):
         self.tabWidget.setCurrentIndex(5)
-        self.REPORTTABLE.setRowCount(0)
-        self.REPORTTABLE.clear()
-        con = sqlite3.connect("face-reco.db")
-        cursor = con.execute("SELECT * FROM attendance")
-        result = cursor.fetchall()
-        r=0
-        c=0
-        for row_number,row_data in enumerate(result):
-            r+=1
-            c=0
-            for column_number,data in enumerate(row_data):
-                c+=1
-        self.REPORTTABLE.setColumnCount(c)
-
-        for row_number,row_data in enumerate(result):
-            self.REPORTTABLE.insertRow(row_number)
-            for column_number, data in enumerate(row_data):
-                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
-
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
-        self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(1,60)
-        self.REPORTTABLE.setColumnWidth(2,70)
-        self.REPORTTABLE.verticalHeader().setVisible(False)
-
-
-    def show_eligibility_report(self):
         self.STATUSTABLE.setRowCount(0)
         self.STATUSTABLE.clear()
         con = sqlite3.connect("face-reco.db")
-        cursor = con.execute("SELECT * FROM attendance WHERE attendancedate = '"+ str((self.dateEdit.date()).toPyDate()) +"'")
+        cursor = con.execute("SELECT * FROM attendance")
         result = cursor.fetchall()
         r=0
         c=0
@@ -174,11 +147,38 @@ class MainApp(QMainWindow, ui):
         self.STATUSTABLE.setColumnCount(c)
 
         for row_number,row_data in enumerate(result):
-            self.REPORTTABLE.insertRow(row_number)
+            self.STATUSTABLE.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+                self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number'])        
+        self.STATUSTABLE.setColumnWidth(0,10)
+        self.STATUSTABLE.setColumnWidth(1,60)
+        self.STATUSTABLE.setColumnWidth(2,70)
+        self.STATUSTABLE.verticalHeader().setVisible(False)
+
+
+    def show_eligibility_report(self):
+        self.STATUSTABLE.setRowCount(0)
+        self.STATUSTABLE.clear()
+        con = sqlite3.connect("face-reco.db")
+        cursor = con.execute("SELECT *,    CASE    WHEN COUNT(matric number)/2 > 1 THEN 'qualified'    ELSE 'not qualified'    WHERE attendancedate BETWEEN '" + str((self.dateEdit_3.date()).toPyDate()) + "' AND '" + str((self.dateEdit_2.date()).toPyDate()) + "'" +  "END AS Eligibility FROM attendance;")
+        result = cursor.fetchall()
+        r=0
+        c=0
+        for row_number,row_data in enumerate(result):
+            r+=1
+            c=0
+            for column_number,data in enumerate(row_data):
+                c+=1
+        self.STATUSTABLE.setColumnCount(c)
+
+        for row_number,row_data in enumerate(result):
+            self.STATUSTABLE.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
+
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number','Eligibility'])        
         self.STATUSTABLE.setColumnWidth(0,10)
         self.STATUSTABLE.setColumnWidth(1,60)
         self.STATUSTABLE.setColumnWidth(2,70)

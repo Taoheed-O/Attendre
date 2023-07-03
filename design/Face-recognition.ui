@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
+    <width>649</width>
     <height>450</height>
    </rect>
   </property>
@@ -21,13 +21,13 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
-      <width>581</width>
+      <y>10</y>
+      <width>601</width>
       <height>431</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -224,7 +224,7 @@ background-color: rgba(255, 255, 255, 0);</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-20</y>
         <width>581</width>
         <height>411</height>
        </rect>
@@ -247,7 +247,7 @@ font: 75 8pt &quot;Terminal&quot;;</string>
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>60</y>
+        <y>40</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -278,7 +278,7 @@ QPushButton#TRAINLINK1:hover{
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>300</y>
+        <y>320</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -309,7 +309,7 @@ QPushButton#LOGOUT:hover{
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>140</y>
+        <y>100</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -340,7 +340,7 @@ QPushButton#ATTLINK1:hover{
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>220</y>
+        <y>180</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -365,6 +365,37 @@ QPushButton#REPORTSLINK1:hover{
       </property>
       <property name="text">
        <string>Reports</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ELIGIBILITYLINK1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>250</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#ELIGIBILITYLINK1{
+	background-color: rgb(10, 50, 76);
+	border-radius: 10px;
+	border-bottom: 2px solid rgba(0,0,0,100);
+	padding: 10px;
+	font: 12pt &quot;Terminal&quot;;
+	color: rgb(2, 255, 200);
+}
+
+
+QPushButton#ELIGIBILITYLINK1:hover{
+	background-color: rgb(10, 60, 76);
+	border-radius: 10px;
+	color: rgb(20, 255, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Status</string>
       </property>
      </widget>
     </widget>
@@ -881,6 +912,151 @@ QPushButton#PREVIOUSREPORT:hover{
         <width>211</width>
         <height>192</height>
        </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>-50</x>
+        <y>-10</y>
+        <width>671</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>reports.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>0</y>
+        <width>231</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(2, 255, 200);
+font: 70 11pt &quot;Terminal&quot;;
+background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string>ELIGIBILITY REPORTS</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>80</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(2, 255, 200);
+font: 75 10pt &quot;Terminal&quot;;
+background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string>End Date:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>40</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(2, 255, 200);
+font: 75 10pt &quot;Terminal&quot;;
+background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string>Start Date:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>90</y>
+        <width>110</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>50</y>
+        <width>110</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="STATUSTABLE">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>140</y>
+        <width>211</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="PREVIOUSREPORT_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>350</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#PREVIOUSREPORT_2{
+	background-color: rgb(10, 50, 76);
+	border-radius: 10px;
+	border-bottom: 2px solid rgba(0,0,0,100);
+	padding: 10px;
+	font: 10pt &quot;Terminal&quot;;
+	color: rgb(2, 255, 200);
+}
+
+
+QPushButton#PREVIOUSREPORT_2:hover{
+	background-color: rgb(10, 60, 76);
+	border-radius: 10px;
+	color: rgb(20, 255, 200);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Prev</string>
       </property>
      </widget>
     </widget>

@@ -32,6 +32,7 @@ class MainApp(QMainWindow, ui):
         self.dateEdit_3.setDate(date.today())
         self.dateEdit.dateChanged.connect(self.show_selected_date_report)
         self.dateEdit_2.dateChanged.connect(self.show_eligibility_report)
+        self.dateEdit_3.dateChanged.connect(self.show_eligibility_report)
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
@@ -44,7 +45,7 @@ class MainApp(QMainWindow, ui):
     ### LOGIN PROCESS ###
     def login(self):
         pw = self.PASSWORD.text()
-        if(pw=="UiDept123#"):
+        if(pw=="123"):
             self.PASSWORD.setText("")
             self.LOGIN.setText("")
             self.tabWidget.setCurrentIndex(1)
@@ -94,7 +95,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)
@@ -122,7 +123,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Matric number','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,60)
         self.REPORTTABLE.setColumnWidth(2,70)
@@ -151,7 +152,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number'])        
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Name', 'Date'])        
         self.STATUSTABLE.setColumnWidth(0,10)
         self.STATUSTABLE.setColumnWidth(1,60)
         self.STATUSTABLE.setColumnWidth(2,70)
@@ -162,7 +163,19 @@ class MainApp(QMainWindow, ui):
         self.STATUSTABLE.setRowCount(0)
         self.STATUSTABLE.clear()
         con = sqlite3.connect("face-reco.db")
-        cursor = con.execute("SELECT *,    CASE    WHEN COUNT(matric number)/2 > 1 THEN 'qualified'    ELSE 'not qualified'    WHERE attendancedate BETWEEN '" + str((self.dateEdit_3.date()).toPyDate()) + "' AND '" + str((self.dateEdit_2.date()).toPyDate()) + "'" +  "END AS Eligibility FROM attendance;")
+        command = f"""
+SELECT
+	name,
+    COUNT(name) AS classes_attended,
+	IIF(COUNT(name) > 1, 'qualified', 'not qualified') AS eligibility
+FROM
+	attendance 
+WHERE
+	attendancedate >= {(self.dateEdit_3.date()).toPyDate()} AND attendancedate <= {(self.dateEdit_2.date()).toPyDate()}
+GROUP BY
+	name;
+        """
+        cursor = con.execute(command)
         result = cursor.fetchall()
         r=0
         c=0
@@ -178,9 +191,9 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Matric number','Eligibility'])        
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Name','Classes_attended','Eligibility'])        
         self.STATUSTABLE.setColumnWidth(0,10)
-        self.STATUSTABLE.setColumnWidth(1,60)
+        self.STATUSTABLE.setColumnWidth(1,100)
         self.STATUSTABLE.setColumnWidth(2,70)
         self.STATUSTABLE.verticalHeader().setVisible(False)
 

@@ -167,7 +167,7 @@ class MainApp(QMainWindow, ui):
 SELECT
 	name,
     COUNT(name) AS classes_attended,
-	IIF(COUNT(name) > 1, 'qualified', 'not qualified') AS eligible
+	IIF(COUNT(name)/COUNT(attendancedate) >= 0.7, 'qualified', 'not qualified') AS eligible
 FROM
 	attendance 
 WHERE

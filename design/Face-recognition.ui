@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
+    <width>651</width>
     <height>450</height>
    </rect>
   </property>
@@ -922,7 +922,7 @@ QPushButton#PREVIOUSREPORT:hover{
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>-50</x>
+        <x>-70</x>
         <y>-10</y>
         <width>671</width>
         <height>421</height>
@@ -959,7 +959,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      <widget class="QLabel" name="label_19">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>330</x>
         <y>80</y>
         <width>161</width>
         <height>51</height>
@@ -980,7 +980,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>330</x>
         <y>40</y>
         <width>161</width>
         <height>51</height>
@@ -1001,7 +1001,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      <widget class="QDateEdit" name="dateEdit_2">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>470</x>
         <y>90</y>
         <width>110</width>
         <height>31</height>
@@ -1011,7 +1011,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      <widget class="QDateEdit" name="dateEdit_3">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>470</x>
         <y>50</y>
         <width>110</width>
         <height>31</height>
@@ -1022,17 +1022,17 @@ background-color: rgba(255, 255, 255, 0);</string>
       <property name="geometry">
        <rect>
         <x>370</x>
-        <y>140</y>
+        <y>171</y>
         <width>211</width>
-        <height>192</height>
+        <height>181</height>
        </rect>
       </property>
      </widget>
      <widget class="QPushButton" name="PREVIOUSREPORT_2">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>350</y>
+        <x>420</x>
+        <y>360</y>
         <width>111</width>
         <height>41</height>
        </rect>
@@ -1057,6 +1057,37 @@ QPushButton#PREVIOUSREPORT_2:hover{
       </property>
       <property name="text">
        <string>Prev</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox">
+      <property name="geometry">
+       <rect>
+        <x>531</x>
+        <y>131</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>120</y>
+        <width>201</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(2, 255, 200);
+font: 75 10pt &quot;Terminal&quot;;
+background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string>Total number of classes:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>

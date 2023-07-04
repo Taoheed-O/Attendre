@@ -171,7 +171,7 @@ SELECT
 FROM
 	attendance 
 WHERE
-	attendancedate >= '2023-06-20' AND attendancedate <= '2023-07-01'
+	attendancedate >= '{str((self.dateEdit_3.date()).toPyDate())}' AND attendancedate <= '{str((self.dateEdit_2.date()).toPyDate())}'
 GROUP BY
 	name;
    """

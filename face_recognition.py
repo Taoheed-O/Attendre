@@ -32,7 +32,6 @@ class MainApp(QMainWindow, ui):
         self.dateEdit_3.setDate(date.today())
         self.dateEdit.dateChanged.connect(self.show_selected_date_report)
         self.dateEdit_2.dateChanged.connect(self.show_eligibility_report)
-        self.dateEdit_3.dateChanged.connect(self.show_eligibility_report)
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")

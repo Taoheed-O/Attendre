@@ -32,6 +32,7 @@ class MainApp(QMainWindow, ui):
         self.dateEdit_3.setDate(date.today())
         self.dateEdit.dateChanged.connect(self.show_selected_date_report)
         self.dateEdit_2.dateChanged.connect(self.show_eligibility_report)
+        self.spinBox.valueChanged.connect(self.show_eligibility_report)
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
@@ -167,7 +168,7 @@ class MainApp(QMainWindow, ui):
 SELECT
 	name,
     COUNT(name) AS classes_attended,
-	IIF(COUNT(name)/COUNT(attendancedate) >= 0.7, 'qualified', 'not qualified') AS eligible
+	IIF(COUNT(name)/ {self.spinBox.value()}, 'qualified', 'not qualified') AS eligible
 FROM
 	attendance 
 WHERE

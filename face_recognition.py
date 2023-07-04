@@ -136,7 +136,7 @@ class MainApp(QMainWindow, ui):
         self.STATUSTABLE.setRowCount(0)
         self.STATUSTABLE.clear()
         con = sqlite3.connect("face-reco.db")
-        cursor = con.execute("SELECT * FROM attendance")
+        cursor = con.execute('SELECT * FROM attendance')
         result = cursor.fetchall()
         r=0
         c=0
@@ -152,7 +152,7 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Name', 'Date'])        
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id', 'Name', 'Date'])        
         self.STATUSTABLE.setColumnWidth(0,10)
         self.STATUSTABLE.setColumnWidth(1,60)
         self.STATUSTABLE.setColumnWidth(2,70)
@@ -163,19 +163,20 @@ class MainApp(QMainWindow, ui):
         self.STATUSTABLE.setRowCount(0)
         self.STATUSTABLE.clear()
         con = sqlite3.connect("face-reco.db")
-        command = f"""
+        command_drop = con.execute('DROP TABLE IF EXISTS eligibility;')
+        command_create = f"""
 SELECT
 	name,
     COUNT(name) AS classes_attended,
-	IIF(COUNT(name) > 1, 'qualified', 'not qualified') AS eligibility
+	IIF(COUNT(name) > 1, 'qualified', 'not qualified') AS eligible
 FROM
 	attendance 
 WHERE
-	attendancedate >= {(self.dateEdit_3.date()).toPyDate()} AND attendancedate <= {(self.dateEdit_2.date()).toPyDate()}
+	attendancedate >= '2023-06-20' AND attendancedate <= '2023-07-01'
 GROUP BY
 	name;
-        """
-        cursor = con.execute(command)
+   """
+        cursor = con.execute(command_create)
         result = cursor.fetchall()
         r=0
         c=0

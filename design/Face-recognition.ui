@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -912,6 +912,16 @@ QPushButton#PREVIOUSREPORT:hover{
         <width>211</width>
         <height>192</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget#REPORTTABLE{
+	background-color: rgb(10, 50, 76);
+	border-radius: 10px;
+	border-bottom: 2px solid rgba(0,0,0,100);
+	padding: 10px;
+	color: rgb(2, 255, 200);
+}
+</string>
       </property>
      </widget>
     </widget>

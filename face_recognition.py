@@ -168,7 +168,7 @@ class MainApp(QMainWindow, ui):
 SELECT
 	name,
     COUNT(name) AS classes_attended,
-	IIF(COUNT(name)/ {self.spinBox.value()}, 'qualified', 'not qualified') AS eligible
+	IIF(COUNT(name)/ {self.spinBox.value()}, 'eligible', 'not eligible') AS eligible
 FROM
 	attendance 
 WHERE

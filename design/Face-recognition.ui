@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -1026,6 +1026,16 @@ background-color: rgba(255, 255, 255, 0);</string>
         <width>211</width>
         <height>181</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget#STATUSTABLE{
+	background-color: rgb(10, 50, 76);
+	border-radius: 10px;
+	border-bottom: 2px solid rgba(0,0,0,100);
+	padding: 10px;
+	color: rgb(2, 255, 200);
+}
+</string>
       </property>
      </widget>
      <widget class="QPushButton" name="PREVIOUSREPORT_2">

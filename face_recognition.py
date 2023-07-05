@@ -36,7 +36,7 @@ class MainApp(QMainWindow, ui):
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
-            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, matric number INTEGER, attendancedate TEXT)")
+            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, matric number INTEGER, sex TEXT, category TEXT, attendancedate TEXT)")
             con.commit()
             print("Table created successfully")
         except:
@@ -95,9 +95,12 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(1,60)
+        self.REPORTTABLE.setColumnWidth(1,100)
+        self.REPORTTABLE.setColumnWidth(2,50)
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(0,50)
         self.REPORTTABLE.setColumnWidth(2,70)
         self.REPORTTABLE.verticalHeader().setVisible(False)
 
@@ -123,9 +126,12 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name','Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
         self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(1,60)
+        self.REPORTTABLE.setColumnWidth(1,100)
+        self.REPORTTABLE.setColumnWidth(2,50)
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(0,50)
         self.REPORTTABLE.setColumnWidth(2,70)
         self.REPORTTABLE.verticalHeader().setVisible(False)
 
@@ -152,11 +158,14 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Id', 'Name', 'Date'])        
-        self.STATUSTABLE.setColumnWidth(0,10)
-        self.STATUSTABLE.setColumnWidth(1,60)
-        self.STATUSTABLE.setColumnWidth(2,70)
-        self.STATUSTABLE.verticalHeader().setVisible(False)
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(1,100)
+        self.REPORTTABLE.setColumnWidth(2,50)
+        self.REPORTTABLE.setColumnWidth(0,10)
+        self.REPORTTABLE.setColumnWidth(0,50)
+        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.verticalHeader().setVisible(False)
 
 
     def show_eligibility_report(self):
@@ -167,6 +176,9 @@ class MainApp(QMainWindow, ui):
         command_create = f"""
 SELECT
 	name,
+    matric number,
+    sex,
+    category,
     COUNT(name) AS classes_attended,
 	IIF(COUNT(name)/ {self.spinBox.value()}, 'eligible', 'not eligible') AS eligible
 FROM
@@ -192,16 +204,19 @@ GROUP BY
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.STATUSTABLE.setHorizontalHeaderLabels(['Name','Classes_attended','Eligibility'])        
-        self.STATUSTABLE.setColumnWidth(0,10)
-        self.STATUSTABLE.setColumnWidth(1,100)
-        self.STATUSTABLE.setColumnWidth(2,70)
-        self.STATUSTABLE.verticalHeader().setVisible(False)
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Name','Matric number', 'Sex', 'Category','Classes_attended','Eligibility'])        
+        self.REPORTTABLE.setColumnWidth(0,100)
+        self.REPORTTABLE.setColumnWidth(1,10)
+        self.REPORTTABLE.setColumnWidth(2,10)
+        self.REPORTTABLE.setColumnWidth(0,50)
+        self.REPORTTABLE.setColumnWidth(0,5)
+        self.REPORTTABLE.setColumnWidth(2,50)
+        self.REPORTTABLE.verticalHeader().setVisible(False)
 
     ### TRAINING PROCESS ###
     def start_training(self):
         haar_file = 'haarcascade_files/haarcascade_frontalface_default.xml'
-        datasets = 'students'
+        datasets = 'database'
         sub_data = self.traineeName.text()
         path = os.path.join(datasets,sub_data)
         if not os.path.isdir(path):
@@ -238,7 +253,7 @@ GROUP BY
         self.currentstatus.setText("Process started.. Waiting..")        
         haar_file = 'haarcascade_frontalface_default.xml'
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + haar_file)
-        datasets = 'students'
+        datasets = 'database'
         (images,labels,names,id) =([],[],{},0)
         for(subdirs,dirs,files) in os.walk(datasets):
             for subdir in dirs:
@@ -293,7 +308,7 @@ GROUP BY
                         if result:
                             available=True
                         if(available==False):
-                            con.execute("INSERT INTO attendance VALUES("+ str(attendanceid) +",'"+ str(names[prediction[0]]) +"','"+ str(date.today()) +"')")
+                            con.execute("INSERT INTO attendance VALUES("+ str(attendanceid) +",'"+ str(names[prediction[0]]) +"',"+ str(self.traineeMat.text()) +",'"+ str(self.traineeSex.text()) +"','"+ str(self.traineeCat.text()) +"','" + str(date.today()) +"')")
                             con.commit()   
                     except:
                         print("Error in database insert")

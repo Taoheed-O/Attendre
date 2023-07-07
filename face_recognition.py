@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUiType
 import sys
 import sqlite3
+import datetime
 from datetime import date
 import cv2, os, numpy
 
@@ -36,7 +37,7 @@ class MainApp(QMainWindow, ui):
         self.tabWidget.setStyleSheet("QTabWidget::pane{border:0;}")
         try:
             con = sqlite3.connect("face-reco.db")
-            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, matric number INTEGER, sex TEXT, category TEXT, attendancedate TEXT)")
+            con.execute("CREATE TABLE IF NOT EXISTS attendance(attendanceid INTEGER, name TEXT, matric_number INTEGER, sex TEXT, category TEXT, attendancedate TEXT, time TEXT)")
             con.commit()
             print("Table created successfully")
         except:
@@ -95,13 +96,14 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date', 'Time'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,100)
         self.REPORTTABLE.setColumnWidth(2,50)
-        self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(0,50)
-        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.setColumnWidth(3,10)
+        self.REPORTTABLE.setColumnWidth(4,50)
+        self.REPORTTABLE.setColumnWidth(5,70)
+        self.REPORTTABLE.setColumnWidth(6,10)
         self.REPORTTABLE.verticalHeader().setVisible(False)
 
 
@@ -126,13 +128,14 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.REPORTTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
+        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date', 'Time'])        
         self.REPORTTABLE.setColumnWidth(0,10)
         self.REPORTTABLE.setColumnWidth(1,100)
         self.REPORTTABLE.setColumnWidth(2,50)
-        self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(0,50)
-        self.REPORTTABLE.setColumnWidth(2,70)
+        self.REPORTTABLE.setColumnWidth(3,10)
+        self.REPORTTABLE.setColumnWidth(4,50)
+        self.REPORTTABLE.setColumnWidth(5,70)
+        self.REPORTTABLE.setColumnWidth(6,10)
         self.REPORTTABLE.verticalHeader().setVisible(False)
 
 
@@ -158,14 +161,15 @@ class MainApp(QMainWindow, ui):
             for column_number, data in enumerate(row_data):
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
-        self.REPORTTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date'])        
-        self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(1,100)
-        self.REPORTTABLE.setColumnWidth(2,50)
-        self.REPORTTABLE.setColumnWidth(0,10)
-        self.REPORTTABLE.setColumnWidth(0,50)
-        self.REPORTTABLE.setColumnWidth(2,70)
-        self.REPORTTABLE.verticalHeader().setVisible(False)
+        self.STATUSTABLE.setHorizontalHeaderLabels(['Id','Name', 'Matric number', 'Sex', 'Category', 'Date', 'Time'])        
+        self.STATUSTABLE.setColumnWidth(0,10)
+        self.STATUSTABLE.setColumnWidth(1,100)
+        self.STATUSTABLE.setColumnWidth(2,50)
+        self.STATUSTABLE.setColumnWidth(3,10)
+        self.STATUSTABLE.setColumnWidth(4,50)
+        self.STATUSTABLE.setColumnWidth(5,70)
+        self.STATUSTABLE.setColumnWidth(6,10)
+        self.STATUSTABLE.verticalHeader().setVisible(False)
 
 
     def show_eligibility_report(self):
@@ -176,7 +180,7 @@ class MainApp(QMainWindow, ui):
         command_create = f"""
 SELECT
 	name,
-    matric number,
+    matric_number,
     sex,
     category,
     COUNT(name) AS classes_attended,
@@ -205,13 +209,13 @@ GROUP BY
                 self.STATUSTABLE.setItem(row_number,column_number,QTableWidgetItem(str(data)))
 
         self.STATUSTABLE.setHorizontalHeaderLabels(['Name','Matric number', 'Sex', 'Category','Classes_attended','Eligibility'])        
-        self.REPORTTABLE.setColumnWidth(0,100)
-        self.REPORTTABLE.setColumnWidth(1,10)
-        self.REPORTTABLE.setColumnWidth(2,10)
-        self.REPORTTABLE.setColumnWidth(0,50)
-        self.REPORTTABLE.setColumnWidth(0,5)
-        self.REPORTTABLE.setColumnWidth(2,50)
-        self.REPORTTABLE.verticalHeader().setVisible(False)
+        self.STATUSTABLE.setColumnWidth(0,100)
+        self.STATUSTABLE.setColumnWidth(1,10)
+        self.STATUSTABLE.setColumnWidth(2,10)
+        self.STATUSTABLE.setColumnWidth(3,50)
+        self.STATUSTABLE.setColumnWidth(4,5)
+        self.STATUSTABLE.setColumnWidth(5,50)
+        self.STATUSTABLE.verticalHeader().setVisible(False)
 
     ### TRAINING PROCESS ###
     def start_training(self):
@@ -308,7 +312,7 @@ GROUP BY
                         if result:
                             available=True
                         if(available==False):
-                            con.execute("INSERT INTO attendance VALUES("+ str(attendanceid) +",'"+ str(names[prediction[0]]) +"',"+ str(self.traineeMat.text()) +",'"+ str(self.traineeSex.text()) +"','"+ str(self.traineeCat.text()) +"','" + str(date.today()) +"')")
+                            con.execute("INSERT INTO attendance VALUES("+ str(attendanceid) +",'"+ str(names[prediction[0]]) +"',"+ str(self.traineeMat.text()) +",'"+ str(self.traineeSex.text()) +"','"+ str(self.traineeCat.text()) +"','"+ str(date.today()) +"', '"+ str(datetime.datetime.now().time().strftime('%H:%M')) +"')")
                             con.commit()   
                     except:
                         print("Error in database insert")

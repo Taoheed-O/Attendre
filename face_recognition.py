@@ -184,7 +184,7 @@ SELECT
     sex,
     category,
     COUNT(name) AS classes_attended,
-	IIF(COUNT(name)/ {self.spinBox.value()}, 'eligible', 'not eligible') AS eligible
+	IIF(COUNT(name)/ {float(self.spinBox.value())} > 0.6, 'eligible', 'not eligible') AS eligible
 FROM
 	attendance 
 WHERE
@@ -192,6 +192,7 @@ WHERE
 GROUP BY
 	name;
    """
+        
         cursor = con.execute(command_create)
         result = cursor.fetchall()
         r=0

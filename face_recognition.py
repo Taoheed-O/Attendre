@@ -43,6 +43,7 @@ class MainApp(QMainWindow, ui):
         except:
             print("Error in database")
 
+
     ### LOGIN PROCESS ###
     def login(self):
         pw = self.PASSWORD.text()
@@ -54,25 +55,31 @@ class MainApp(QMainWindow, ui):
             self.invalidmessage.setText("Invalid Password...")
             self.PASSWORD.setText("")
 
+
     ### LOG OUT PROCESS ###
     def logout(self):
         self.tabWidget.setCurrentIndex(0)
+
 
     ### CLOSE WINDOW PROCESS ###
     def close_window(self):
         self.close()
 
+
     ### SHOW MAIN FORM ###
     def show_mainform(self):
         self.tabWidget.setCurrentIndex(1)        
+
 
     ### SHOW TRAINING FORM ###
     def show_training_form(self):
         self.tabWidget.setCurrentIndex(2)
 
+
     ### SHOW ATTENDANCE ENTRY FORM ###
     def show_attendance_entry_form(self):
         self.tabWidget.setCurrentIndex(3)
+
 
     ### SHOW REPORT FORM ###
     def show_report_form(self):
@@ -137,7 +144,6 @@ class MainApp(QMainWindow, ui):
         self.REPORTTABLE.setColumnWidth(5,70)
         self.REPORTTABLE.setColumnWidth(6,10)
         self.REPORTTABLE.verticalHeader().setVisible(False)
-
 
 
     def show_status_form(self):
@@ -218,6 +224,7 @@ GROUP BY
         self.STATUSTABLE.setColumnWidth(5,50)
         self.STATUSTABLE.verticalHeader().setVisible(False)
 
+
     ### TRAINING PROCESS ###
     def start_training(self):
         haar_file = 'haarcascade_files/haarcascade_frontalface_default.xml'
@@ -252,6 +259,7 @@ GROUP BY
             QMessageBox.information(self,"Attendance System","Training Completed Successfully")  
             self.traineeName.setText("")
             self.traineeCAPTURES.setText("100")
+
 
     ### RECORD ATTENDANCE ###
     def record_attendance(self):
